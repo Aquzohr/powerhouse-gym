@@ -4,7 +4,19 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+    
+    @members = Member.search(params[:searchText]).order("code asc").paginate(page: params[:pageNumber], per_page: params[:pageSize])
+
+    respond_to do |f|
+      f.html { render 'members/index' }
+      f.json { 
+        render json: {
+          total: @members.total_entries,
+          rows: @members.as_json({ index: true })
+        } 
+      }
+    end
+
   end
 
   # GET /members/1

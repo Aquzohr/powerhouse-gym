@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @serf.date %>
+</p>
+
+<p>
+  <strong>Checkin time:</strong>
+  <%= @serf.checkin_time %>
+</p>
+
+<p>
+  <strong>Checkout time:</strong>
+  <%= @serf.checkout_time %>
+</p>
+
+<%= link_to 'Edit', edit_serf_path(@serf) %> |
+<%= link_to 'Back', serves_path %>
