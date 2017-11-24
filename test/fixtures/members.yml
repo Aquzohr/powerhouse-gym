@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  firstname: MyString
+  lastname: MyString
+  nickname: MyString
+  member_type: MyString
+  bdate: 2017-11-23
+  regisdate: 2017-11-23
+  expdate: 2017-11-23
+  pc_amount: 1
+  pc_balance: 1
+
+two:
+  code: MyString
+  firstname: MyString
+  lastname: MyString
+  nickname: MyString
+  member_type: MyString
+  bdate: 2017-11-23
+  regisdate: 2017-11-23
+  expdate: 2017-11-23
+  pc_amount: 1
+  pc_balance: 1

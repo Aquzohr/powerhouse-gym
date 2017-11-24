@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @member.code %>
+</p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @member.firstname %>
+</p>
+
+<p>
+  <strong>Lastname:</strong>
+  <%= @member.lastname %>
+</p>
+
+<p>
+  <strong>Nickname:</strong>
+  <%= @member.nickname %>
+</p>
+
+<p>
+  <strong>Member type:</strong>
+  <%= @member.member_type %>
+</p>
+
+<p>
+  <strong>Bdate:</strong>
+  <%= @member.bdate %>
+</p>
+
+<p>
+  <strong>Regisdate:</strong>
+  <%= @member.regisdate %>
+</p>
+
+<p>
+  <strong>Expdate:</strong>
+  <%= @member.expdate %>
+</p>
+
+<p>
+  <strong>Pc amount:</strong>
+  <%= @member.pc_amount %>
+</p>
+
+<p>
+  <strong>Pc balance:</strong>
+  <%= @member.pc_balance %>
+</p>
+
+<%= link_to 'Edit', edit_member_path(@member) %> |
+<%= link_to 'Back', members_path %>
