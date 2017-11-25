@@ -28,8 +28,22 @@ class ServesController < ApplicationController
 
     respond_to do |format|
       if @serf.save
-        format.html { redirect_to root_path, notice: 'Serve was successfully created.' }
-        format.json { render :show, status: :created, location: @serf }
+
+        member = Member.find(params[:serve][:member_id])
+
+        if member.member_type == "Punch Card"
+
+          old_balance = member.pc_balance
+
+          member.decrement! :pc_balance
+
+          format.html { redirect_to root_path, notice: "Punch Card ลดลงเหลือ  #{member.pc_balance} จาก #{old_balance}" }
+        else
+
+          format.html { redirect_to root_path, notice: 'Serve was successfully Checkin.' }
+        end
+
+        
       else
         format.html { render :new }
         format.json { render json: @serf.errors, status: :unprocessable_entity }
@@ -81,6 +95,8 @@ class ServesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def serf_params
+      params[:serve][:member_id] = Member.find_by_code(params[:serve][:member_id]).id
+
       params.require(:serve).permit(:date, :checkin_time, :checkout_time, :member_id)
     end
 end
