@@ -5,7 +5,7 @@
 
 <%= bootstrap_form_for(@serve) do |f| %>
 
-  <%= f.text_field :member_id, hide_label: true, placeholder: "MEMBER CODE" %>
+  <%= f.text_field :member_id, hide_label: true, placeholder: "MEMBER CODE", autofocus: true %>
   <%= f.hidden_field :checkin_time, value: Time.now.strftime("%H:%M:%S") %>
   <%= f.hidden_field :date, value: Time.now %>
   
@@ -25,7 +25,7 @@
 	  			<p><h4>Fullname : <%= @lastCheckin.member.firstname %> <%= @lastCheckin.member.lastname %></h4></p>
 	  			<p><h4>Regis Date : <%= @lastCheckin.member.regisdate %> </h4></p>
 					
-					<% if @lastCheckin.member.expdate %>
+				<% unless @lastCheckin.member.expdate.blank? %>
 		  			<% if Time.now.to_date < Date.parse(@lastCheckin.member.expdate) %>
 		  				<p><h4 class="text-success">Exp Date : <%= @lastCheckin.member.expdate %> </h4></p>
 		  			<% else %>
@@ -47,10 +47,13 @@
 <% end %>
 
 <div class="col-md-12 text-right"><h3><kbd>TODAY: <%= Time.now.to_date %></kbd></h3></div>
-<table data-toggle="table">
+<table  data-toggle="table"
+		data-pagination="true"
+        data-pagination-loop ="false" >
 	<thead>
 		<th>NO.</th>
-		<th>Member Code</th>
+		<th>Code</th>
+		<th>Fullname</th>
 		<th>Checkin Time</th>
 		<th>Action</th>
 	</thead>
@@ -60,6 +63,7 @@
 			<tr>
 				<td><%= i+1 %></td>
 				<td><%= s.member.code %></td>
+				<td><%= s.member.firstname %> <%= s.member.lastname %></td>
 				<td><%= s.checkin_time %></td>
 				<td><%= link_to 'Checkout', s, method: :patch, data: { confirm: 'Are you sure?' } %></td>
 			</tr>
@@ -68,6 +72,7 @@
 
 	<tfoot>
 		<tr>
+			<td></td>
 			<td></td>
 			<td></td>
 			<td></td>

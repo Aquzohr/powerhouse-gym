@@ -15,6 +15,14 @@ ActiveRecord::Schema.define(version: 20171124080336) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "class_exercises", force: :cascade do |t|
+    t.string   "name"
+    t.date     "date"
+    t.time     "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.string  "code"
     t.string  "firstname"
@@ -26,6 +34,14 @@ ActiveRecord::Schema.define(version: 20171124080336) do
     t.string  "expdate"
     t.integer "pc_amount"
     t.integer "pc_balance"
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.float    "cash",         default: 0.0,    null: false
+    t.string   "credit_type",  default: "none", null: false
+    t.float    "credit_price", default: 0.0,    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "serves", force: :cascade do |t|
