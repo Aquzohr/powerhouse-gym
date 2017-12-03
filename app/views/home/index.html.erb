@@ -60,7 +60,7 @@
 
 	<tbody>
 		<% @serves.each_with_index do |s,i| %>
-			<% if s %>
+			<% if s.member %>
 				<tr>
 					<td><%= i+1 %></td>
 					<td><%= s.member.code %></td>
