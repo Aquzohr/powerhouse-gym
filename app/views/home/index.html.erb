@@ -60,13 +60,15 @@
 
 	<tbody>
 		<% @serves.each_with_index do |s,i| %>
-			<tr>
-				<td><%= i+1 %></td>
-				<td><%= s.member.code %></td>
-				<td><%= s.member.firstname %> <%= s.member.lastname %></td>
-				<td><%= s.checkin_time %></td>
-				<td><%= link_to 'Checkout', s, method: :patch, data: { confirm: 'Are you sure?' } %></td>
-			</tr>
+			<% if s %>
+				<tr>
+					<td><%= i+1 %></td>
+					<td><%= s.member.code %></td>
+					<td><%= s.member.firstname %> <%= s.member.lastname %></td>
+					<td><%= s.checkin_time %></td>
+					<td><%= link_to 'Checkout', s, method: :patch, data: { confirm: 'Are you sure?' } %></td>
+				</tr>
+			<% end %>
 		<% end %>
 	</tbody>
 
