@@ -4,7 +4,18 @@ class ServesController < ApplicationController
   # GET /serves
   # GET /serves.json
   def index
-    @serves = Serve.all
+    @serves = Serve.order("date desc, checkout_time desc").paginate(page: params[:pageNumber], per_page: params[:pageSize])
+
+    respond_to do |f|
+      f.html { render 'serves/index' }
+      f.json { 
+        render json: {
+          total: @serves.total_entries,
+          rows: @serves.as_json({ index: true })
+        } 
+      }
+    end
+
   end
 
   # GET /serves/1
@@ -55,7 +66,7 @@ class ServesController < ApplicationController
   # PATCH/PUT /serves/1.json
   def update
     respond_to do |format|
-      if @serf.update(checkout_time: Time.now)
+      if @serf.update(checkout_time: Time.now.strftime("%H:%M:%S"))
         format.html { redirect_to root_path, notice: 'Serve was successfully updated.' }
         format.json { render :show, status: :ok, location: @serf }
       else
