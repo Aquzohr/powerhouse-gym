@@ -2,21 +2,35 @@
 
 <h1>Serves</h1>
 
+<hr>
+
+<%= bootstrap_form_tag url: '/serves', method: :get, layout: :inline do |f| %>
+  <h4>Input Month</h4>
+  <%= f.text_field :input_date, hide_label: true, placeholder: '2017-11' %>
+  <%= f.submit "Show Report" %>
+<% end %>
+
+
 <table id="table" 
        data-toggle="table"
-       data-query-params-type="page"
        data-search="false"
        data-pagination="true"
        data-pagination-loop ="false"
-       data-side-pagination="server"
-       data-url="serves.json">
+       >
   <thead>
     <tr>
-      <th data-field="member_code" data-sortable="true">Code</th>
-      <th data-field="member_fullname" >Fullname</th>
-      <th data-field="date">Date</th>
-      <th data-field="checkin_time" >Checkin Time</th>
-      <th data-field="checkout_time" >Checkout Time</th>
+      <th>Full Name</th>
+      <th>Serve Count</th>
     </tr>
   </thead>
+  <tbody>
+
+    <% @serves.each do |s| %>
+    <tr>
+      <td><%= Member.fullname(s[0]) %></td>
+      <td><%= s[1] %></td>
+    </tr>
+    <% end %>
+
+  </tbody>
 <table>

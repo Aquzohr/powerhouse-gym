@@ -4,17 +4,17 @@ class ServesController < ApplicationController
   # GET /serves
   # GET /serves.json
   def index
-    @serves = Serve.order("date desc, checkout_time desc").paginate(page: params[:pageNumber], per_page: params[:pageSize])
 
-    respond_to do |f|
-      f.html { render 'serves/index' }
-      f.json { 
-        render json: {
-          total: @serves.total_entries,
-          rows: @serves.as_json({ index: true })
-        } 
-      }
+    if params[:input_date].nil?
+      input_date = Time.now.strftime("%Y-%m")
+    else
+      input_date = params[:input_date]
     end
+
+    puts "============="
+    puts input_date
+
+    @serves = Serve.joins(:member).group(:member_id).where("cast(serves.date as text) LIKE '#{input_date}%'").count
 
   end
 

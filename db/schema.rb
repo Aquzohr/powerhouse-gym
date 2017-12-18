@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171124080336) do
+ActiveRecord::Schema.define(version: 20171218094959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "class_exercises", force: :cascade do |t|
-    t.string   "name"
-    t.date     "date"
-    t.time     "time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "members", force: :cascade do |t|
     t.string  "code"
@@ -34,14 +26,16 @@ ActiveRecord::Schema.define(version: 20171124080336) do
     t.string  "expdate"
     t.integer "pc_amount"
     t.integer "pc_balance"
+    t.string  "phone"
   end
 
-  create_table "receipts", force: :cascade do |t|
-    t.float    "cash",         default: 0.0,    null: false
-    t.string   "credit_type",  default: "none", null: false
-    t.float    "credit_price", default: 0.0,    null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+  create_table "products", force: :cascade do |t|
+    t.string   "barcode"
+    t.string   "pname"
+    t.float    "price",      default: 0.0, null: false
+    t.string   "ptype"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "serves", force: :cascade do |t|
@@ -52,6 +46,14 @@ ActiveRecord::Schema.define(version: 20171124080336) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["member_id"], name: "index_serves_on_member_id", using: :btree
+  end
+
+  create_table "staffs", force: :cascade do |t|
+    t.string   "fullname"
+    t.string   "nickname"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

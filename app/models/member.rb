@@ -7,6 +7,11 @@ class Member < ApplicationRecord
 	  where("code LIKE :search OR firstname LIKE :search OR lastname LIKE :search OR nickname LIKE :search", search: wildcard_search)
 	end
 
+  def self.fullname(id)
+    member = Member.find(id)
+    "#{member.firstname}  #{member.lastname}"
+  end
+
 	def edit_link(id)
 	  "<a href='/members/#{id}/edit'>Edit</a>"
 	end
@@ -22,6 +27,7 @@ class Member < ApplicationRecord
         code: self.code,
         fullname: "#{self.firstname} #{self.lastname}",
         nickname: self.nickname,
+        phone: self.phone,
         member_type: self.member_type,
         bdate: self.bdate,
         regisdate: self.regisdate,
