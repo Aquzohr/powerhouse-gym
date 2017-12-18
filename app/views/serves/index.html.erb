@@ -6,14 +6,13 @@
 
 <%= bootstrap_form_tag url: '/serves', method: :get, layout: :inline do |f| %>
   <h4>Input Month</h4>
-  <%= f.text_field :input_date, hide_label: true, placeholder: '2017-11' %>
+  <%= f.text_field :input_date, hide_label: true, placeholder: 'EX. 2017-11' %>
   <%= f.submit "Show Report" %>
 <% end %>
 
-
 <table id="table" 
        data-toggle="table"
-       data-search="false"
+       data-search="true"
        data-pagination="true"
        data-pagination-loop ="false"
        >
@@ -24,12 +23,14 @@
     </tr>
   </thead>
   <tbody>
-
-    <% @serves.each do |s| %>
-    <tr>
-      <td><%= Member.fullname(s[0]) %></td>
-      <td><%= s[1] %></td>
-    </tr>
+    
+    <% if @serves %>
+      <% @serves.each do |s| %>
+      <tr>
+        <td><%= Member.fullname(s[0]) %></td>
+        <td><%= s[1] %></td>
+      </tr>
+      <% end %>
     <% end %>
 
   </tbody>

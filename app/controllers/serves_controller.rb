@@ -5,16 +5,15 @@ class ServesController < ApplicationController
   # GET /serves.json
   def index
 
-    if params[:input_date].nil?
-      input_date = Time.now.strftime("%Y-%m")
-    else
-      input_date = params[:input_date]
+    # if params[:input_date].nil?
+    #   input_date = Time.now.strftime("%Y-%m")
+    # else
+    #   input_date = params[:input_date]
+    # end
+    
+    if params[:input_date]
+      @serves = Serve.joins(:member).group(:member_id).where("cast(serves.date as text) LIKE '#{params[:input_date]}%'").count.sort_by { |k,v| v}.reverse 
     end
-
-    puts "============="
-    puts input_date
-
-    @serves = Serve.joins(:member).group(:member_id).where("cast(serves.date as text) LIKE '#{input_date}%'").count
 
   end
 
