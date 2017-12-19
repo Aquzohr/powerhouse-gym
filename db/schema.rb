@@ -29,15 +29,6 @@ ActiveRecord::Schema.define(version: 20171218094959) do
     t.string  "phone"
   end
 
-  create_table "products", force: :cascade do |t|
-    t.string   "barcode"
-    t.string   "pname"
-    t.float    "price",      default: 0.0, null: false
-    t.string   "ptype"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
   create_table "serves", force: :cascade do |t|
     t.date     "date"
     t.string   "checkin_time"
@@ -46,14 +37,6 @@ ActiveRecord::Schema.define(version: 20171218094959) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["member_id"], name: "index_serves_on_member_id", using: :btree
-  end
-
-  create_table "staffs", force: :cascade do |t|
-    t.string   "fullname"
-    t.string   "nickname"
-    t.string   "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end

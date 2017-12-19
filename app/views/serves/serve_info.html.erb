@@ -1,0 +1,27 @@
+<table id="table" 
+       data-toggle="table"
+       data-search="true"
+       data-pagination="true"
+       data-pagination-loop ="false"
+       >
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Checkin Time</th>
+      <th>Checkout Time</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% if @serves %>
+      <% @serves.each do |s| %>
+      <tr>
+      	<td><%= s.date %></td>
+      	<td><%= s.checkin_time %></td>
+      	<td><%= s.checkout_time %></td>
+      </tr>
+      <% end %>
+    <% end %>
+
+  </tbody>
+<table>

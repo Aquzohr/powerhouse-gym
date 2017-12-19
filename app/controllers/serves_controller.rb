@@ -1,5 +1,5 @@
 class ServesController < ApplicationController
-  before_action :set_serf, only: [:show, :edit, :update, :destroy]
+  before_action :set_serf, only: [:edit, :update, :destroy]
 
   # GET /serves
   # GET /serves.json
@@ -12,6 +12,7 @@ class ServesController < ApplicationController
     # end
     
     if params[:input_date]
+      @input_date = params[:input_date]
       @serves = Serve.joins(:member).group(:member_id).where("cast(serves.date as text) LIKE '#{params[:input_date]}%'").count.sort_by { |k,v| v}.reverse 
     end
 
@@ -95,6 +96,13 @@ class ServesController < ApplicationController
          format.json { render json: @checkin.errors, status: :unprocessable_entity }
        end
      end
+  end
+
+  def serve_info
+
+    @serves = Serve.where("member_id=#{params[:id]} and  cast(date as text) LIKE '#{params[:date]}%'")
+
+    render 'serves/serve_info'
   end
 
   private
