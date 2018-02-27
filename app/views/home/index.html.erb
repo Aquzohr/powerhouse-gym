@@ -24,17 +24,7 @@
 	  		<div class="col-md-6">
 	  			<p><h4>Fullname : <%= @lastCheckin.member.firstname %> <%= @lastCheckin.member.lastname %></h4></p>
 	  			<p><h4>Regis Date : <%= @lastCheckin.member.regisdate %> </h4></p>
-					
-				<% unless @lastCheckin.member.expdate.blank? %>
-		  			<% if Time.now.to_date < Date.parse(@lastCheckin.member.expdate) %>
-		  				<p><h4 class="text-success">Exp Date : <%= @lastCheckin.member.expdate %> </h4></p>
-		  			<% else %>
-		  				<p><h4 class="text-danger">Exp Date : <%= @lastCheckin.member.expdate %></h4></p>
-		  			<% end %>
-		  		<% else %>
-		  			<p><h4>Exp Date : ไม่ระบุวันหมดอายุ </h4></p>
-		  		<% end %>
-
+	  			<p><h4>Exp Date : <%= @lastCheckin.member.expdate %> </h4></p>
 	  		</div>
 	  		<div class="col-md-6">
 	  			<p><h4>BoD: <%= @lastCheckin.member.bdate %> </h4></p>

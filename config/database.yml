@@ -20,12 +20,7 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-development:
-  <<: *default
-  database: powerhouse_dev
-
-  # The specified database role being used to connect to postgres.
+    # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
@@ -42,6 +37,10 @@ development:
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
   port: 5432
+
+development:
+  <<: *default
+  database: powerhouse_dev
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
